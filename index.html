@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern 3D Portfolio</title>
+  <title>Pankaj Makvana | Modern 3D Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <style>
@@ -15,7 +15,7 @@
     }
     body {
       font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #fff;
       overflow-x: hidden;
     }
@@ -40,37 +40,46 @@
       position: relative;
       z-index: 1;
       text-align: center;
+      padding: 20px;
     }
     .hero-content h1 {
-      font-size: 4rem;
-      background: linear-gradient(90deg, #00dbde, #fc00ff);
+      font-size: 5rem;
+      background: linear-gradient(90deg, #00c6ff, #0072ff, #ff00c8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
     .hero-content p {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       opacity: 0.9;
     }
     section {
-      padding: 100px 10%;
+      padding: 120px 10%;
       text-align: center;
-      background: rgba(255,255,255,0.05);
-      margin: 40px 0;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      margin: 60px 0;
+      border-radius: 30px;
+      backdrop-filter: blur(12px);
       opacity: 0;
-      transform: translateY(80px);
+      transform: translateY(100px);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
     }
     section.visible {
       opacity: 1;
       transform: translateY(0);
       transition: all 1s ease-out;
     }
+    section h2 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #00dbde, #fc00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     footer {
       text-align: center;
-      padding: 50px;
+      padding: 70px;
       opacity: 0.8;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -79,63 +88,85 @@
     <canvas id="heroCanvas"></canvas>
     <div class="hero-content">
       <h1>Hi, I'm Pankaj</h1>
-      <p>Frontend Developer | UI/UX Designer | 3D Enthusiast</p>
+      <p>Creative Frontend Developer | UI/UX Designer | 3D Animation Enthusiast</p>
     </div>
   </header>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>I craft sleek, interactive websites that blend modern design and smooth performance.</p>
+    <p>I blend aesthetics with functionality — creating immersive digital experiences using modern technologies and smooth animations.</p>
   </section>
 
   <section id="projects">
     <h2>Projects</h2>
-    <p>From futuristic UIs to functional web apps, here’s a showcase of my best work.</p>
+    <p>Explore interactive, 3D-powered, and user-friendly projects built with passion and precision.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <p>HTML | CSS | JavaScript | React | Three.js | Anime.js | Figma | Tailwind CSS</p>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Let's connect and create something amazing together!</p>
+    <p>Let's collaborate and build something extraordinary! ✨</p>
   </section>
 
   <footer>
-    <p>© 2025 Pankaj Makvana. All Rights Reserved.</p>
+    <p>© 2025 Pankaj Makvana. Designed with ❤️ and Anime.js</p>
   </footer>
 
   <script>
-    // Anime.js 3D floating cubes
+    // Canvas 3D Animation with Anime.js
     const canvas = document.getElementById('heroCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const cubes = [];
-    for (let i = 0; i < 25; i++) {
-      cubes.push({
+    const shapes = [];
+    for (let i = 0; i < 40; i++) {
+      shapes.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 30 + 20,
-        opacity: Math.random() * 0.6 + 0.4
+        size: Math.random() * 30 + 10,
+        opacity: Math.random() * 0.8 + 0.2,
+        color: `hsl(${Math.random() * 360}, 100%, 60%)`
       });
     }
 
-    function drawCubes() {
+    function drawShapes() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      cubes.forEach(c => {
+      shapes.forEach(s => {
         ctx.save();
-        ctx.translate(c.x, c.y);
-        ctx.rotate(Date.now() / 1000);
-        ctx.globalAlpha = c.opacity;
-        ctx.strokeStyle = '#00ffff';
+        ctx.globalAlpha = s.opacity;
+        ctx.translate(s.x, s.y);
+        ctx.rotate(Date.now() / 2000);
+        ctx.strokeStyle = s.color;
         ctx.lineWidth = 2;
-        ctx.strokeRect(-c.size/2, -c.size/2, c.size, c.size);
+        ctx.beginPath();
+        ctx.moveTo(-s.size / 2, -s.size / 2);
+        ctx.lineTo(s.size / 2, -s.size / 2);
+        ctx.lineTo(0, s.size / 2);
+        ctx.closePath();
+        ctx.stroke();
         ctx.restore();
       });
-      requestAnimationFrame(drawCubes);
+      requestAnimationFrame(drawShapes);
     }
-    drawCubes();
+    drawShapes();
 
-    // Scroll-triggered Anime.js animations
+    anime({
+      targets: shapes,
+      x: () => Math.random() * canvas.width,
+      y: () => Math.random() * canvas.height,
+      opacity: () => Math.random() * 0.8 + 0.2,
+      duration: 4000,
+      easing: 'easeInOutSine',
+      direction: 'alternate',
+      loop: true
+    });
+
+    // Scroll-triggered section animations
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -144,16 +175,21 @@
           anime({
             targets: entry.target.querySelectorAll('h2, p'),
             opacity: [0, 1],
-            translateY: [50, 0],
-            duration: 1200,
+            translateY: [80, 0],
+            duration: 1500,
             easing: 'easeOutExpo',
-            delay: anime.stagger(150)
+            delay: anime.stagger(200)
           });
         }
       });
     }, { threshold: 0.2 });
 
     sections.forEach(sec => observer.observe(sec));
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   </script>
 </body>
 </html>
